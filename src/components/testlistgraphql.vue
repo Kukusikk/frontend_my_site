@@ -1,33 +1,31 @@
+{link.iduser}}  -
 <template>
     <div>
         <testgraphql
-                v-for="link in allLinks" :key="link.id" :link="link">
+                v-for="link in testList" :key="link.iduser" :link="link">
         </testgraphql>
     </div>
 </template>
 
 <script>
     import testgraphql from './testgraphql'
+    import { ALL_LINKS_QUERY } from '../constants/graphql'
 
     export default {
         name: 'testlistgraphql',
         data () {
             return {
-                allLinks: [
-                    {
-                        id: '1',
-                        description: 'The Coolest GraphQL Backend 😎',
-                        url: 'https://www.graph.cool'
-                    }, {
-                        id: '2',
-                        description: 'The Best GraphQL Client',
-                        url: 'http://dev.apollodata.com/'
-                    }
-                ]
+                testList: [],
+                loading: 0
             }
         },
         components: {
             testgraphql
+        },
+        apollo: {
+            testList: {
+                query: ALL_LINKS_QUERY
+            }
         }
     }
 </script>
